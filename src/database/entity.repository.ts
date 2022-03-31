@@ -1,10 +1,12 @@
 import { NotFoundException } from '@nestjs/common';
 import { AggregateRoot } from '@nestjs/cqrs';
+import { InjectConnection } from '@nestjs/mongoose';
 import {
   FilterQuery,
   LeanDocument,
   Model,
   _AllowStringsForIds,
+  Connection,
 } from 'mongoose';
 
 import { EntitySchemaFactory } from './entity-schema.factory';
@@ -15,6 +17,8 @@ export abstract class EntityRepository<
   TEntity extends AggregateRoot
 > {
   constructor(
+    // @InjectConnection()
+    // private readonly connection: Connection,
     protected readonly entityModel: Model<TSchema>,
     protected readonly entitySchemaFactory: EntitySchemaFactory<
       TSchema,
